@@ -1,19 +1,124 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
+import localFont from 'next/font/local';
+import 'prismjs';
+import 'katex';
+
 import "./globals.css";
 
-import 'react-notion-x/src/styles.css'
-import 'prismjs/themes/prism-tomorrow.css'
-import 'katex/dist/katex.min.css'
+import "react-notion-x/src/styles.css";
+import "prismjs/themes/prism-tomorrow.css";
+import "katex/dist/katex.min.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+import { Provider as ThemeProvider } from "@/state/theme";
+import { Provider as QueryProvider } from "@/state/query";
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const agileSans = localFont({
+  src: [
+    {
+      path : 'fonts/agilesans-thin.woff2',
+      weight : '100',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-thinitalic.woff2',
+      weight : '100',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-extralight.woff2',
+      weight : '200',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-extralightitalic.woff2',
+      weight : '200',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-light.woff2',
+      weight : '300',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-lightitalic.woff2',
+      weight : '300',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-medium.woff2',
+      weight : '500',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-mediumitalic.woff2',
+      weight : '500',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-bold.woff2',
+      weight : '600',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-bolditalic.woff2',
+      weight : '600',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-extrabold.woff2',
+      weight : '700',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-extrabolditalic.woff2',
+      weight : '700',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/agilesans-heavy.woff2',
+      weight : '800',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/agilesans-heavyitalic.woff2',
+      weight : '800',
+      style : 'italic',
+    },
+    
+  ],
+  variable: '--font-agile',
+});
+
+const fantasqueSans = localFont({
+  src: [
+    {
+      path: 'fonts/fantasquesans-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: 'fonts/fantasquesans-bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: 'fonts/fantasquesans-bolditalic.woff2',
+      weight: '700',
+      style: 'italic',
+    },
+    {
+      path: 'fonts/fantasquesans-italic.woff2',
+      weight: '400',
+      style: 'italic',
+    },
+  ],
+  variable: '--font-fantasque',
 });
 
 export const metadata: Metadata = {
@@ -27,12 +132,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+    <html lang="en" >
+      <QueryProvider>
+        <body
+          className={`${agileSans.variable} ${fantasqueSans.variable} ${inter.variable} antialiased`}
+        >
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
+        </body>
+      </QueryProvider>
     </html>
   );
 }

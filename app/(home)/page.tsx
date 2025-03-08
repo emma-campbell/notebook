@@ -42,8 +42,6 @@ export default function Home() {
 
     const { data, error, isError } = usePosts(POSTS_ID, query);
 
-    console.debug(data);
-
     if (isError) {
         return <div>Error: {error.message}</div>;
     }

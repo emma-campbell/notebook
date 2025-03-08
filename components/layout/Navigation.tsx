@@ -10,58 +10,65 @@ import {
     NavigationMenuLink,
     NavigationMenuList
 } from "@/components/ui/navigation-menu"
+import { ThemePicker } from "./Theme"
+import { Search } from "./Search"
 
 
-
-const linkStyle = `text-sm font-medium hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1`
+const linkStyle = `text-sm font-light hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground disabled:pointer-events-none disabled:opacity-50 data-[state=open]:hover:bg-accent data-[state=open]:text-accent-foreground data-[state=open]:focus:bg-accent data-[state=open]:bg-accent/50 ring-ring/10 dark:ring-ring/20 dark:outline-ring/40 outline-ring/50 transition-[color,box-shadow] focus-visible:ring-4 focus-visible:outline-1`
 
 export function Navigation() {
     return (
-        <NavigationMenu className="pb-3">
-            <NavigationMenuList>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link
-                            className=""
-                            href="/"
-                        >
-                            <p className={linkStyle}>Home</p>
-                        </Link>
-                    </NavigationMenuLink>
+        <div className="w-full flex justify-between items-center my-8">  
+            <NavigationMenu>
+                <NavigationMenuList>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink asChild>
+                            <Link
+                                className=""
+                                href="/"
+                            >
+                                <p className={linkStyle}>Home</p>
+                            </Link>
+                        </NavigationMenuLink>
 
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link
-                            className=""
-                            href="/"
-                        >
-                            <p className={linkStyle}>Tags</p>
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link
-                            className=""
-                            href="/"
-                        >
-                            <p className={linkStyle}>Type</p>
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                    <NavigationMenuLink asChild>
-                        <Link
-                            className=""
-                            href="/"
-                        >
-                            <p className={linkStyle}>About</p>
-                        </Link>
-                    </NavigationMenuLink>
-                </NavigationMenuItem>
-            </NavigationMenuList>
-        </NavigationMenu>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink asChild>
+                            <Link
+                                className=""
+                                href="/"
+                            >
+                                <p className={linkStyle}>Tags</p>
+                            </Link>
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink asChild>
+                            <Link
+                                className=""
+                                href="/"
+                            >
+                                <p className={linkStyle}>Type</p>
+                            </Link>
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                        <NavigationMenuLink asChild>
+                            <Link
+                                className=""
+                                href="/"
+                            >
+                                <p className={linkStyle}>About</p>
+                            </Link>
+                        </NavigationMenuLink>
+                    </NavigationMenuItem>
+                </NavigationMenuList>
+            </NavigationMenu>
+            <div className="flex gap-2">
+                <Search />
+                <ThemePicker />
+            </div>
+        </div>
     )
 }
 

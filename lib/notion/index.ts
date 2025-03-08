@@ -19,8 +19,8 @@ const PrivateNotionApi = new NotionAPI({
   authToken: NOTION_TOKEN_V2,
 });
 
-export async function getPosts(query: Omit<QueryDatabaseParameters, "database_id">) {
-  const response = await NotionApi.databases.query(Object.assign(query, { database_id: POST_DB as string }));
+export async function getPosts(query?: Omit<QueryDatabaseParameters, "database_id">) {
+  const response = await NotionApi.databases.query(Object.assign(query ?? {}, { database_id: POST_DB as string }));
 
   const posts: any[] = [];
   response.results.forEach((item: any) => {
@@ -45,6 +45,13 @@ export async function getPosts(query: Omit<QueryDatabaseParameters, "database_id
   });
 
   return posts;
+}
+
+export async function getPost(slug: string) {
+  const posts = await (await fetch(`/api/posts`, {
+    method: "POST"
+  })).json();
+  return posts.find((post: Post) => post.slug === slug);
 }
 
 export async function getPostContent(id: string) {
