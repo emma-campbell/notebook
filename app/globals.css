@@ -6,7 +6,6 @@
 
 @font-face {
   font-family: 'Agile Sans';
-  variable: '--font-agile';
   src: 
     url('/fonts/agilesans-regular.woff2') format('woff2'),
     url('/fonts/agilesans-regularitalic.woff2') format('woff2'),
@@ -28,7 +27,6 @@
 
 @font-face {
   font-family: 'Fantasque Sans';
-  variable: '--font-fantasque';
   src: 
     url('/fonts/fantasquesans-regular.woff2') format('woff2'),
     url('/fonts/fantasquesans-bold.woff2') format('woff2'),
@@ -159,7 +157,7 @@
     @apply font-sans font-semibold;
   }
   h1 {
-    @apply uppercase font-black; 
+    @apply font-black; 
   }
 }
 
@@ -185,4 +183,8 @@
 
 .notion-bookmark-link {
   @apply font-sans font-light text-sm;
+}
+
+.notion-collection-page-properties {
+  visibility: hidden;
 }

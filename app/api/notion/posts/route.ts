@@ -2,17 +2,17 @@ import { NotionApi } from "@/lib/notion";
 import { getDateProperty, getStringProperty } from "@/lib/notion/utils";
 import { NextResponse } from "next/server";
 
-import { Post } from "@/lib/notion/types";
+import type { Post } from "@/lib/notion/types";
 
 export async function POST(request: Request) {
     try {
         const body = await request.json();
         const response = await NotionApi.databases.query(body);
         
-        const posts: any[] = [];
+        const posts: Post[] = [];
         
-        response.results.forEach((item: any) => {  
-            if (!("properties" in item)) return;
+        for (const item of response.results) {  
+            if (!("properties" in item)) continue;
             const post: Post = {
                 id: item.id,
                 title: getStringProperty(item, "title"),
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
             if (isComplete) {
                 posts.push(post);
             }
-        });
+        };
 
         return NextResponse.json(posts, { status: 200 });
     } catch (error) {

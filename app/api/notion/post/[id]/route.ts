@@ -22,7 +22,7 @@ export async function GET(request: Request) {
         try {
             const postFindResult = response?.[0] as Post;
             const post = await PrivateNotionApi.getPage(postFindResult?.id, {});            
-            return NextResponse.json(post, { status: 200 });
+            return NextResponse.json({meta: postFindResult, content: post}, { status: 200 });
         } catch (error) {
             console.error("Error fetching posts:", error);
             return NextResponse.json({ error: "Error fetching posts", details: (error as any).toString() }, { status: 404 });

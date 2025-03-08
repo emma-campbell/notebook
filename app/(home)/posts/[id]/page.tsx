@@ -6,24 +6,31 @@ import { useParams } from "next/navigation";
 import { NotionPage } from "@/components/NotionPage";
 import { getPageTitle } from "notion-utils";
 import { Layout } from "@/components/layout/Layout";
+import { formatDistanceToNow } from "date-fns";
 
 export default function Post() {
     const { id } = useParams<{ id: string }>();
-    const { data, error, isError } = usePost(id as string);
+    const { data } = usePost(id as string);
 
     if (!data) {
         return <div>Loading...</div>;
     }
 
-    const title = getPageTitle(data);
+    console.log(data);
+
+    const title = getPageTitle(data?.content);
+    const published = DateTime.fromISO(data?.meta?.published);
 
     return <Layout>
-        <section className="flex flex-col gap-4 items-start w-full pl-4">
-            <h1 className="text-4xl font-bold">{title}</h1>
-            {data.published && <p className="text-sm text-gray-500">{DateTime.fromISO(data.published as any).toLocaleString(DateTime.DATE_MED)}</p>}
+        <section className="flex flex-col gap-2 items-start w-full pl-4">
+            <div className="flex items-center gap-2 justify-between w-full">
+                <h1 className="text-3xl font-bold">{title}</h1>
+                {data?.meta?.category && <p className="text-sm text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded-xs">{data?.meta?.category}</p>}
+            </div>
+            {published &&  <span className="text-sm text-gray-500 dark:text-gray-400">{formatDistanceToNow(published.toJSDate(), { addSuffix: true ,})}</span>}
         </section>
         <section className="w-full">
-            <NotionPage recordMap={data} />
+            <NotionPage recordMap={data?.content} />
         </section>
     </Layout>;
 }
