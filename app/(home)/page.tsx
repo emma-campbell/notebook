@@ -7,11 +7,13 @@ import { DateTime } from "luxon";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { keepPreviousData } from "@tanstack/react-query";
+import { Hero } from "@/components/Hero";
 
 const POSTS_ID = process.env.NEXT_PUBLIC_NOTION_BLOG_DATABASE_ID as string;
 const ENVIRONMENT = process.env.NODE_ENV;
 
 export default function Home() {
+
     const query = ENVIRONMENT !== "development" && {
         filter: {
             property: "status",
@@ -43,16 +45,19 @@ export default function Home() {
     }
 
     return (
-        <div>
-            <Layout>
-                <h1 className="text-4xl font-bold">Posts</h1>
-                <div>
+        <Layout>
+            <Hero />
+            <div className="border-4 border-accent/30 rounded-2xl px-4 py-4">
+                <div className="flex items-center justify-center w-full pb-2">
+                    <h1 className="text-4xl font-bold uppercase">Posts</h1>
+                </div>
+                <div className="flex flex-col gap-4 w-full">
                     {data?.map((post) => (
                         <PostPreview key={post.id} post={post} />
                     ))}
                 </div>
-            </Layout>
-        </div>
+            </div>
+        </Layout>
     )
 }
 
@@ -61,15 +66,11 @@ const PostPreview = ({ post }: { post: Post }) => {
     const slug = post.slug;
     return (
         <Link href={`/posts/${slug}`}>
-            <div className="flex-col gap-4 items-center hover:bg-gray-200/50 dark:hover:bg-gray-900/50 p-4 rounded-md hover:cursor-pointer">
+            <div className="flex-col gap-4 items-center hover:bg-accent/50 dark:hover:bg-accent/20 p-4 rounded-md hover:cursor-pointer">
                 <div className="flex items-center justify-between gap-2">
-                    <h2>{post.title}</h2>
-                    {post.status === "draft" && <p className="text-green-100 bg-green-700 px-1 rounded-sm">Draft</p>}
+                    <h2 className="font-heading uppercase font-black">{post.title}</h2>
                 </div>
-                <div className="flex items-center justify-between gap-2">
-                    {post.published && <p>{formatDistanceToNow(published.toJSDate(), { addSuffix: true })}</p>}
-                    {post.revised && <i className="text-xs">Revised {formatDistanceToNow(post?.revised as any, { addSuffix: true })}</i>}
-                </div>
+                {post.description && <p className="text-sm font-serif font-regular">{post.description}</p>}
             </div>
         </Link>
     )

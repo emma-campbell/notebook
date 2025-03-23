@@ -27,7 +27,7 @@ export default function Post() {
                 <h1 className="text-3xl font-bold">{title}</h1>
                 {data?.meta?.category && <p className="text-sm text-gray-500 dark:text-gray-300 bg-gray-200 dark:bg-gray-800 px-2 py-1 rounded-xs">{data?.meta?.category}</p>}
             </div>
-            {published &&  <span className="text-sm text-gray-500 dark:text-gray-400">{formatDistanceToNow(published.toJSDate(), { addSuffix: true ,})}</span>}
+            {/* {published && <span className="text-sm text-gray-500 dark:text-gray-400">{formatDistanceToNow(published.toJSDate(), { addSuffix: true })}</span>} */}
         </section>
         <section className="w-full">
             <NotionPage recordMap={data?.content} />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Cabin } from "next/font/google";
 import localFont from 'next/font/local';
 import 'prismjs';
 import 'katex';
@@ -13,86 +13,87 @@ import "katex/dist/katex.min.css";
 import { Provider as ThemeProvider } from "@/state/theme";
 import { Provider as QueryProvider } from "@/state/query";
 
-const inter = Inter({
+const cabin = Cabin({
   subsets: ['latin'],
-  variable: '--font-inter',
+  variable: '--font-cabin',
 });
 
-const agileSans = localFont({
+const helloImperfect = localFont({
   src: [
     {
-      path : 'fonts/agilesans-thin.woff2',
-      weight : '100',
-      style : 'normal',
-    },
+      path: 'fonts/hello-imperfect.woff2',
+      weight: '400',
+      style: 'normal',
+    },  
+  ],
+  variable: '--font-hello-imperfect',
+});
+
+const forest = localFont({
+  src: [
     {
-      path : 'fonts/agilesans-thinitalic.woff2',
-      weight : '100',
-      style : 'italic',
-    },
-    {
-      path : 'fonts/agilesans-extralight.woff2',
-      weight : '200',
-      style : 'normal',
-    },
-    {
-      path : 'fonts/agilesans-extralightitalic.woff2',
-      weight : '200',
-      style : 'italic',
-    },
-    {
-      path : 'fonts/agilesans-light.woff2',
+      path : 'fonts/forrest-light.woff2',
       weight : '300',
       style : 'normal',
     },
     {
-      path : 'fonts/agilesans-lightitalic.woff2',
+      path : 'fonts/forrest-lightitalic.woff2',
       weight : '300',
       style : 'italic',
     },
     {
-      path : 'fonts/agilesans-medium.woff2',
+      path : 'fonts/forrest-regular.woff2',
+      weight : '400',
+      style : 'normal',
+    },
+    {
+      path : 'fonts/forrest-regularitalic.woff2',
+      weight : '400',
+      style : 'italic',
+    },
+    {
+      path : 'fonts/forrest-medium.woff2',
       weight : '500',
       style : 'normal',
     },
     {
-      path : 'fonts/agilesans-mediumitalic.woff2',
+      path : 'fonts/forrest-mediumitalic.woff2',
       weight : '500',
       style : 'italic',
     },
     {
-      path : 'fonts/agilesans-bold.woff2',
+      path : 'fonts/forrest-bold.woff2',
       weight : '600',
       style : 'normal',
     },
     {
-      path : 'fonts/agilesans-bolditalic.woff2',
+      path : 'fonts/forrest-bolditalic.woff2',
       weight : '600',
       style : 'italic',
     },
     {
-      path : 'fonts/agilesans-extrabold.woff2',
+      path : 'fonts/forrest-extrabold.woff2',
       weight : '700',
       style : 'normal',
     },
     {
-      path : 'fonts/agilesans-extrabolditalic.woff2',
+      path : 'fonts/forrest-extrabolditalic.woff2',
       weight : '700',
       style : 'italic',
     },
     {
-      path : 'fonts/agilesans-heavy.woff2',
+      path : 'fonts/forrest-heavy.woff2',
       weight : '800',
       style : 'normal',
     },
     {
-      path : 'fonts/agilesans-heavyitalic.woff2',
+      path : 'fonts/forrest-heavyitalic.woff2',
       weight : '800',
       style : 'italic',
     },
     
   ],
-  variable: '--font-agile',
+  variable: '--font-forest',
 });
 
 const fantasqueSans = localFont({
@@ -135,7 +136,7 @@ export default function RootLayout({
     <html lang="en" >
       <QueryProvider>
         <body
-          className={`${agileSans.variable} ${fantasqueSans.variable} ${inter.variable} antialiased`}
+          className={`${forest.variable} ${fantasqueSans.variable} ${cabin.variable} ${helloImperfect.variable} antialiased`}
         >
           <ThemeProvider>
             {children}
