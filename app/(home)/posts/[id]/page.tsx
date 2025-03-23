@@ -6,7 +6,6 @@ import { useParams } from "next/navigation";
 import { NotionPage } from "@/components/NotionPage";
 import { getPageTitle } from "notion-utils";
 import { Layout } from "@/components/layout/Layout";
-import { formatDistanceToNow } from "date-fns";
 
 export default function Post() {
     const { id } = useParams<{ id: string }>();
@@ -19,7 +18,6 @@ export default function Post() {
     console.log(data);
 
     const title = getPageTitle(data?.content);
-    const published = DateTime.fromISO(data?.meta?.published);
 
     return <Layout>
         <section className="flex flex-col gap-2 items-start w-full pl-4">

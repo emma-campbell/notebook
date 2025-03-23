@@ -5,7 +5,6 @@ import { usePosts } from "@/hooks/usePosts";
 import type { Post } from "@/lib/notion/types";
 import { DateTime } from "luxon";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
 import { keepPreviousData } from "@tanstack/react-query";
 import { Hero } from "@/components/Hero";
 
@@ -62,7 +61,6 @@ export default function Home() {
 }
 
 const PostPreview = ({ post }: { post: Post }) => {
-    const published = DateTime.fromISO(post.published as any);
     const slug = post.slug;
     return (
         <Link href={`/posts/${slug}`}>
