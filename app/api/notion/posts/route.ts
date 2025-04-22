@@ -21,7 +21,7 @@ export async function POST(request: Request) {
                 published: getDateProperty(item, "published"),
                 revised: getDateProperty(item, "revised"),
                 category: getStringProperty(item, "category"),
-                status: getStringProperty(item, "status").toLowerCase(),
+                status: getStringProperty(item, "status")
             }
 
             const requiredProperties = ["slug", "title", "category", "status"];
